@@ -1,5 +1,14 @@
 var signinBoard = document.querySelector('.signin-board');
 var signupBoard = document.querySelector('.signup-board');
+var loginSUp = document.querySelector('.signup-form_item_login');
+var usernameSUp = document.querySelector('.signup-form_item_username');
+var emailSUp = document.querySelector('.signup-form_item_email');
+var passwordSUp = document.querySelector('.signup-form_item_password');
+var passwordConfirmSUp = document.querySelector('.signup-form_item_passwordConfirm');
+var serverErrors = document.querySelector('.server-errors');
+var popupSignupForm = document.querySelector('.popup-signup-form');
+var signupButton = document.querySelector('.signin-button-signup');
+var cancelButton = document.querySelector('.signup-button-cancel');
 
 function sendAjax(type, path, args, responseHandler){
     var token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
@@ -30,7 +39,25 @@ function setDisplay(input, condition){
     }
 }
 
-signinBoard.addEventListener('submit', function (e) {
+function clearSignupForm(){
+    popupSignupForm.style.display = "none";
+    loginSUp.value="";
+    usernameSUp.value="";
+    emailSUp.value="";
+    passwordSUp.value="";
+    passwordConfirmSUp.value="";
+}
+
+function handleCreate(response){
+    if(response.message!=""){
+        serverErrors.textContent = response.message;
+        serverErrors.style.display = "block"
+    }else{
+        clearSignupForm();
+    }
+}
+
+signinBoard.addEventListener('submit', function (e){
     e.preventDefault();
     var invalidLoginSIn = document.querySelector('.signin-form_invalid_login');
     var invalidPasswordSIn = document.querySelector('.signin-form_invalid_password');
@@ -47,32 +74,7 @@ signinBoard.addEventListener('submit', function (e) {
     }
 });
 
-var loginSUp = document.querySelector('.signup-form_item_login');
-var usernameSUp = document.querySelector('.signup-form_item_username');
-var emailSUp = document.querySelector('.signup-form_item_email');
-var passwordSUp = document.querySelector('.signup-form_item_password');
-var passwordConfirmSUp = document.querySelector('.signup-form_item_passwordConfirm');
-var serverErrors = document.querySelector('.server-errors');
-var signupContainer = document.querySelector('.signup-container');
-var popupSignupForm = document.querySelector('.popup-signup-form');
-
-function handleCreate(response){
-
-    if(response.message!=""){
-        serverErrors.textContent = response.message;
-        serverErrors.style.display = "block"
-    }else{
-        loginSUp.value="";
-        usernameSUp.value="";
-        emailSUp.value="";
-        passwordSUp.value="";
-        passwordConfirmSUp.value="";
-        signupContainer.style.display = "none";
-        popupSignupForm.style.display = "none";
-    }
-}
-
-signupBoard.addEventListener('submit', function (e) {
+signupBoard.addEventListener('submit', function (e){
     e.preventDefault();
     var invalidLoginSUp = document.querySelector('.signup-form_invalid_login');
     var invalidUsernameSUp = document.querySelector('.signup-form_invalid_username');
@@ -87,27 +89,18 @@ signupBoard.addEventListener('submit', function (e) {
     setDisplay(invalidUsernameSUp, isValidUsername);
     setDisplay(invalidEmailSUp, isValidEmail);
     setDisplay(invalidPasswordSUp, isValidPassword);
+
     if(isValidLogin && isValidUsername && isValidEmail && isValidPassword) {
         var params = JSON.stringify({"id":0,"login":loginSUp.value,"username":usernameSUp.value,"email":emailSUp.value,"password":passwordSUp.value,"passwordConfirm":passwordConfirmSUp.value,"active":0,"roles":[{"id":0,"name":null}]});
         sendAjax('POST', '/create', params, handleCreate);
     }
 });
 
-var signupButton = document.querySelector('.signin-button-signup');
-var cancelButton = document.querySelector('.signup-button-cancel');
-
-signupButton.addEventListener('click', function () {
-    signupContainer.style.display = "block";
+signupButton.addEventListener('click', function (){
     popupSignupForm.style.display = "block";
     serverErrors.style.display = "none";
 });
 
-cancelButton.addEventListener('click', function () {
-    signupContainer.style.display = "none";
-    popupSignupForm.style.display = "none";
-    loginSUp.value="";
-    usernameSUp.value="";
-    emailSUp.value="";
-    passwordSUp.value="";
-    passwordConfirmSUp.value="";
+cancelButton.addEventListener('click', function (){
+    clearSignupForm();
 });

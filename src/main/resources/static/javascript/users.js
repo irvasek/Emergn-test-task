@@ -1,16 +1,17 @@
 var editButton = document.querySelector('.item_edit-button');
 var cancelButton = document.querySelector('.edit-button-cancel');
-var editContainer = document.querySelector('.edit-container');
 var popupEditForm = document.querySelector('.popup-edit-form');
 var editBoard = document.querySelector('.edit-board');
 var resetButton = document.querySelector('.reset-button');
-
+var filterButton = document.querySelector('.filter-button');
+var passwordEd = document.querySelector('.edit-form_item_password');
+var passwordConfirmEd = document.querySelector('.edit-form_item_passwordConfirm');
 
 function sendAjax(type, path, args, responseHandler){
     var token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
     var header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function (){
         var DONE = 4;
         var OK = 200;
         if (xhr.readyState == DONE) {
@@ -53,19 +54,14 @@ function handleEdit(response){
         password.innerHTML = response.user.password;
         passwordEd.value="";
         passwordConfirmEd.value="";
-        editContainer.style.display = "none";
         popupEditForm.style.display = "none";
     }
 }
 
-var usernameEd = document.querySelector('.edit-form_item_username');
-var emailEd = document.querySelector('.edit-form_item_email');
-var passwordEd = document.querySelector('.edit-form_item_password');
-var passwordConfirmEd = document.querySelector('.edit-form_item_passwordConfirm');
-
-editBoard.addEventListener('submit', function (e) {
+editBoard.addEventListener('submit', function (e){
     e.preventDefault();
-
+    var usernameEd = document.querySelector('.edit-form_item_username');
+    var emailEd = document.querySelector('.edit-form_item_email');
     var invalidUsernameEd = document.querySelector('.edit-form_invalid_username');
     var invalidEmailEd = document.querySelector('.edit-form_invalid_email');
     var invalidPasswordEd = document.querySelector('.edit-form_invalid_password');
@@ -77,7 +73,7 @@ editBoard.addEventListener('submit', function (e) {
     setDisplay(invalidEmailEd, isValidEmail);
     setDisplay(invalidPasswordEd, isValidPassword);
 
-    if(isValidUsername && isValidEmail && isValidPassword) {
+    if(isValidUsername && isValidEmail && isValidPassword){
         var usernameValue = document.querySelector('.edit-form_item_username').value;
         var loginValue = document.querySelector('.edit-form_item_login').value;
         var emailValue = document.querySelector('.edit-form_item_email').value;
@@ -88,14 +84,12 @@ editBoard.addEventListener('submit', function (e) {
     }
 });
 
-editButton.addEventListener('click', function () {
-    editContainer.style.display = "block";
+editButton.addEventListener('click', function (){
     popupEditForm.style.display = "block";
     serverErrors.style.display = "none";
 });
 
-cancelButton.addEventListener('click', function () {
-    editContainer.style.display = "none";
+cancelButton.addEventListener('click', function (){
     popupEditForm.style.display = "none";
 });
 
@@ -123,15 +117,13 @@ function customFilter(user){
     return !isPresent;
 }
 
-var filterButton = document.querySelector('.filter-button');
-
-filterButton.addEventListener('click', function () {
+filterButton.addEventListener('click', function (){
     var allUsers = document.querySelectorAll('.users-list_item');
     var filtered = Array.from(allUsers).filter(customFilter);
     filtered.forEach(user => user.style.display="none");
 });
 
-resetButton.addEventListener('click', function () {
+resetButton.addEventListener('click', function (){
     var allUsers = document.querySelectorAll('.users-list_item');
     allUsers.forEach(user => user.style.display="table-row");
 });
