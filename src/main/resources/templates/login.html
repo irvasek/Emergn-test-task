@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Please sign in</title>
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body class="login-page">
+<div class="signin-container">
+    <form class="signin-board" th:action="@{/login}" method="post">
+        <h2 class="title">Please sign in</h2>
+        <div class="signin-form">
+            <div class="signin-form_item">
+                <div class="signin-form_item_error signin-form_invalid_login error">Invalid login</div>
+                <input type="text" name="login" class="signin-form_item_input signin-form_item_login"
+                       placeholder="Login"
+                       aria-label="Input your login"
+                       autofocus>
+            </div>
+            <div class="signin-form_item">
+                <div class="signin-form_item_error signin-form_invalid_password error">Invalid password</div>
+                <input type="password" name="password" class="signin-form_item_input signin-form_item_password"
+                       placeholder="Password"
+                       aria-label="Input your password">
+            </div>
+        </div>
+        <div class="signin">
+            <button class="signin-button-submit button" type="submit" aria-label="Press to sign in">Sign in</button>
+        </div>
+        <div class="signup">
+            <button class="signin-button-signup button" type="button" aria-label="Press to sign up">Sign up</button>
+        </div>
+    </form>
+</div>
+<div class="popup-signup-form">
+    <div class="signup-container">
+        <form class="signup-board">
+            <h2 class="title">Please sign up</h2>
+            <div class="signup-form">
+                <div class="signup-form_item">
+                    <textarea class="signup-form_item_error server-errors error" readonly></textarea>
+                    <div class="signup-form_item_error signup-form_invalid_login error">Invalid login</div>
+                    <input type="text" name="login" class="signup-form_item_input signup-form_item_login"
+                           placeholder="Login"
+                           aria-label="Input your login"
+                           autofocus>
+                </div>
+                <div class="signup-form_item">
+                    <div class="signup-form_item_error signup-form_invalid_username error">Invalid username</div>
+                    <input type="text" name="username" class="signup-form_item_input signup-form_item_username"
+                           placeholder="Username"
+                           aria-label="Input your username">
+                </div>
+                <div class="signup-form_item">
+                    <div class="signup-form_item_error signup-form_invalid_email error">Invalid email</div>
+                    <input type="text" name="email" class="signup-form_item_input signup-form_item_email"
+                           placeholder="Email"
+                           aria-label="Input your email">
+                </div>
+                <div class="signup-form_item">
+                    <div class="signup-form_item_error signup-form_invalid_password error">Invalid password</div>
+                    <input type="password" name="password" class="signup-form_item_input signup-form_item_password"
+                           placeholder="Password"
+                           aria-label="Input your password">
+                </div>
+                <div class="signup-form_item">
+                    <div class="signup-form_item_error signup-form_invalid_passwordConfirm error">Passwords do not match</div>
+                    <input type="password" name="passwordConfirm"
+                           class="signup-form_item_input signup-form_item_passwordConfirm"
+                           placeholder="Confirm password"
+                           aria-label="Confirm password">
+                </div>
+            </div>
+            <div class="signup">
+                <button class="signup-button-summit button" type="submit" aria-label="Press to sign up">Sign up</button>
+            </div>
+            <div class="cancel">
+                <button class="signup-button-cancel button" type="button" aria-label="Press to cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/javascript/login.js"></script>
+</body>
+</html>

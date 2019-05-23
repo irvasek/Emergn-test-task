@@ -1,0 +1,136 @@
+html, body, div, h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    text-align: center;
+    width: 260px;
+    height: 35px;
+    border-radius: 2px;
+    background: rgb(114, 159, 249);
+    border-color: rgb(89, 144, 255);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 100;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    margin: 5px;
+}
+
+.small-button {
+    width: 50px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.error {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+    color: rgba(175, 47, 47, 0.35);
+    margin: 8px 0;
+    display: none;
+}
+
+.title,
+.current-user {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 100;
+    color: rgba(175, 47, 47, 0.15);
+    margin: 8px 0;
+}
+
+.current-user{
+    text-align:left;
+    font-size: 15px;
+}
+
+.signup-form_item_input,
+.signin-form_item_input,
+.edit-form_item_input {
+    margin: 5px;
+    width: 250px;
+    height: 25px;
+    border-radius: 2px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.popup-signup-form,
+.popup-edit-form {
+    position: relative;
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+    display:none;
+}
+
+.signup-container,
+.signin-container,
+.edit-container {
+    text-align: center;
+    padding: 50px;
+    background: #fff;
+    width:400px;
+    height:100%;
+    border-color: #ccc;
+    margin: auto;
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+
+.users-board {
+    width: 800px;
+    padding: 50px;
+    text-align: center;
+    margin: auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+
+.users-list {
+    width: 800px;
+    table-layout: fixed;
+    padding: 50px;
+    background: #fff;
+}
+
+.user-ceil {
+    text-align:left;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.user-ceil-right {
+    text-align:right;
+}
+
+.server-errors {
+    width: 250px;
+    height: 50px;
+    border:solid 1px rgba(175, 47, 47, 0.35);
+    overflow: auto;
+    resize: none;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.filter {
+    width: 200px;
+    height: 20px;
+    overflow: auto;
+    resize: none;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
